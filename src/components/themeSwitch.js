@@ -13,7 +13,7 @@ const ThemeSwitch = () => {
     }, [theme])
 
     return (
-        <button className="fixed top-1 right-1 rounded-lg bg-accent px-5 py-1/2" onClick={changeTheme}>
+        <button className="fixed top-1 right-1 rounded-lg bg-accent px-5 py-1/2 hover:bg-accent-focus text-accent-content" onClick={changeTheme}>
             {theme === "winter" ? "Light" : "Dark"}
         </button>
     )
