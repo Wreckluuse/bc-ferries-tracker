@@ -1,11 +1,17 @@
 export const ferryRoutes = {
  TSAWASSEN: "TSA",
  SWARTZ_BAY: "SWB",
- SOUTHERN_GULF_ISLANDS: "SGI",
  DUKE_POINT: "DUK",
- SALTSPRING_ISLAND: "FUL",
  HORSESHOE_BAY: "HSB",
  NANAIMO: "NAN",
- LANGFORD: "LNG",
+ LANGDALE: "LNG",
  BOWEN_ISLAND: "BOW",
 }
+
+// tsa can go to swb and duk
+// swb can go to tsa
+// duk can go to tsa
+// hsb can go to nan and lng
+// nan can go to hsb
+// lng can go to hsb
+// bow can go to hsb

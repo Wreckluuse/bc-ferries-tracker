@@ -1,69 +1,207 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { ferryRoutes } from "../ferryRoutes";
-// rotating cards with each step
+import { CSSTransition } from "react-transition-group";
+
 const SearchForm = () => {
+  const [currentStep, setStep] = useState(0);
+  const [departureTerminal, setDepartureTerminal] = useState("");
+  const [destinationTerminal, setDestinationTerminal] = useState("");
+  const [welcomeIn, setWelcomeIn] = useState(true);
+  const [departureIn, setDepartureIn] = useState(false);
+  const [destinationIn, setDestinationIn] = useState(false);
 
-    // const getDeparture = (input) => {
-        // localStorage.setItem("departure", input.value);
-    // };
-// 
-    // const getDestination = (input) => {
-        // localStorage.setItem("destination", input.value)
-    // };
-// 
-    // const getDepartureTime = (input) => {
-        // localStorage.setItem
-    // };
+  const nodeRef = useRef(null);
+  const nodeRef2 = useRef(null);
 
-    const getInput = (input) => {
-        localStorage.setItem(input.name, input.value);
-    };
+  const nextStep = () => {
+    setStep(currentStep + 1);
+  };
 
-    const displayResults = () => {
+  const getInput = (event) => {
+    switch (event.target.name) {
+      case "departure":
+        setDepartureTerminal(event.target.value);
+        break;
+      case "destination":
+        setDestinationTerminal(event.target.value);
+        break;
+      default:
+        break;
+    }
+    nextStep();
+  };
 
-    };
+  const displayResults = () => {};
 
-    const updateResults = () => {
+  const updateResults = () => {};
 
-    };
+  const jumpTo = (event) => {
+    switch (event.target.id) {
+      case "step_1":
+        setStep(1);
+        break;
+      case "step_2":
+        setStep(2);
+        break;
+      default:
+        break;
+    }
+  };
 
-    return (
-        <div className="items-center h-full">
-            <div className="h-full rounded-lg flex flex-col overflow-x-hidden" id="form-container">
-                <div className="flex flex-col h-full">
-                    <div className="text-center flex flex-col align-center items-center h-full transition-opacity">
-                        <h3 className="text-center">Where are you departing from?</h3>
-                        <div className="grid grid-cols-3 h-[40%] w-[70%] ml-auto mr-auto mt-20 gap-12">
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.TSAWASSEN}>Tsawassen</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.SWARTZ_BAY}>Swartz Bay</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.SOUTHERN_GULF_ISLANDS}>Gulf Islands</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.DUKE_POINT}>Duke Point</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.SALTSPRING_ISLAND}>Saltspring Island</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.HORSESHOE_BAY}>Horseshoe Bay</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.NANAIMO}>Nanaimo</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.LANGFORD}>Langford</button>
-                            <button name="departure" className="text-center border rounded-md bg-primary hover:bg-primary-focus text-primary-content" click={getInput(this)} value={ferryRoutes.BOWEN_ISLAND}>Bowen Island</button>
-                        </div>
-                    </div>
-                    <div className="text-center hidden align-top items-center transition-opacity">
-                        <h3 className="text-center align-top mt-2 w-full">Where are you going?</h3>
-                    </div>
-                    <div className="text-center hidden align-top items-center">
-                        <h3 className="text-center w-full hidden">When would you prefer to leave?</h3>
-                        <input className="hidden" type="date"></input>
-                    </div>
-                    <div id="results" className="hidden"></div>
-                </div>
-                <ul className="steps h-[40%] w-full">
-                    <li className="text-primary step step-primary">Departure</li>
-                    <li className="text-neutral-content step step-neutral-content">Destination</li>
-                    <li className="text-neutral-content step step-neutral-content">Date</li>
-                    <li className="text-neutral-content step step-neutral-content">Time</li>
-                    <li className="text-neutral-content step step-neutral-content">Results</li>
-                </ul>
-            </div>
+  const welcome = (
+    <div className="flex flex-col h-[50%] gap-16 mt-[25vh]">
+      <h3 className="text-center ">
+        To start searching for ferries, click the button below!
+      </h3>
+
+      <button
+        id="getStarted"
+        className="self-center w-[20%] px-2 text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px"
+        onClick={() => {
+          setDepartureIn(true);
+          nextStep();
+        }}
+      >
+        Get Started
+      </button>
+    </div>
+  );
+
+  const selectDeparture = (
+ 
+      <div
+        ref={nodeRef}
+        className="text-center flex-col align-center items-center h-full"
+      >
+        <h3 className="text-center">Where are you departing from?</h3>
+        <div className="grid grid-cols-2 h-[25%] w-[50%] ml-auto mr-auto mt-[8%] gap-12">
+          <button
+            name="departure"
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px"
+            onClick={getInput}
+            value={ferryRoutes.TSAWASSEN}
+          >
+            Tsawassen
+          </button>
+          <button
+            name="departure"
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px"
+            onClick={getInput}
+            value={ferryRoutes.SWARTZ_BAY}
+          >
+            Swartz Bay
+          </button>
+          <button
+            name="departure"
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px transition-opacity delay-50"
+            onClick={getInput}
+            value={ferryRoutes.SOUTHERN_GULF_ISLANDS}
+          >
+            Gulf Islands
+          </button>
+          <button
+            name="departure"
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px transition-opacity delay-75"
+            onClick={getInput}
+            value={ferryRoutes.DUKE_POINT}
+          >
+            Duke Point
+          </button>
+          <button
+            name="departure"
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px transition-opacity delay-125"
+            onClick={getInput}
+            value={ferryRoutes.HORSESHOE_BAY}
+          >
+            Horseshoe Bay
+          </button>
+          <button
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px transition-opacity delay-150"
+            onClick={getInput}
+            value={ferryRoutes.NANAIMO}
+          >
+            Nanaimo
+          </button>
+          <button
+            name="departure"
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px transition-opacity delay-175"
+            onClick={getInput}
+            value={ferryRoutes.LANGDALE}
+          >
+            Langdale
+          </button>
+          <button
+            name="departure"
+            className="text-center rounded-md bg-primary shadow-md text-primary-content hover:bg-primary-focus hover:shadow-2xl hover:-translate-y-px transition-opacity delay-200"
+            onClick={getInput}
+            value={ferryRoutes.BOWEN_ISLAND}
+          >
+            Bowen Island
+          </button>
         </div>
-    )
+      </div>
+  );
+
+  const selectDestination = (
+    <div
+      id="destination"
+      className="text-center hidden align-top items-center transition-opacity"
+    >
+      <h3 className="text-center align-top mt-2 w-full">
+        Where are you going?
+      </h3>
+    </div>
+  );
+
+  const results = <div id="results" className=""></div>;
+
+  const steps = [welcome, selectDeparture, selectDestination, results];
+
+  return (
+    <div className="justify-center h-full">
+      <div
+        className="h-full rounded-lg flex flex-col overflow-x-hidden"
+        id="form-container"
+      >
+        <div className="flex flex-col h-full">{steps[currentStep]}</div>
+        {currentStep === 0 ? null : (
+          <ul className="steps h-[20%] w-full text-xl">
+            <li
+              id="step_1"
+              onClick={jumpTo}
+              className={
+                currentStep === 1
+                  ? "text-secondary step step-primary transition-colors duration-500"
+                  : "text-neutral step step-neutral-content transition-colors duration-500"
+              }
+            >
+              Departure
+            </li>
+            <li
+              id="step_2"
+              onClick={jumpTo}
+              className={
+                currentStep === 2
+                  ? "text-secondary step step-primary transition-colors duration-500"
+                  : "text-neutral step step-neutral-content transition-colors duration-500"
+              }
+            >
+              Destination
+            </li>
+            <li
+              className={
+                currentStep === 3
+                  ? "text-secondary step step-primary transition-colors duration-500"
+                  : "text-neutral step step-neutral-content transition-colors duration-500"
+              }
+            >
+              Results
+            </li>
+          </ul>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default SearchForm;
