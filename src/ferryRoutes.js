@@ -6,8 +6,8 @@ export const ferryRoutes = {
  NANAIMO: "NAN",
  LANGDALE: "LNG",
  BOWEN_ISLAND: "BOW",
+ FULFORD_HARBOUR: "FUL"
 }
-
 // tsa can go to swb and duk
 // swb can go to tsa
 // duk can go to tsa
