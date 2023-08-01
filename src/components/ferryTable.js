@@ -8,7 +8,7 @@ const FerryTable = (props) => {
     const [sailings, updateSailings] = useState({});
 
     const fetchSchedule = (departure, destination) => {
-        fetch('https://www.bcferriesapi.ca/api/' + departure + '/' + destination).then(response => {
+        fetch('https://www.bcferriesapi.ca/api/').then(response => {
             return response.json()
         }).then(data => {
             updateSailings(data);
