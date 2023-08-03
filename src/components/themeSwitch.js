@@ -1,8 +1,19 @@
 import { React, useState, useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
+
 
 const ThemeSwitch = () => {
   const [theme, setTheme] = useState("fantasy");
 
+  const sun = <FontAwesomeIcon icon={faSun} />;
+  const moon = <FontAwesomeIcon icon={faMoon} />
+
+  /**
+   * This function is responsible for
+   * toggling between light and dark modes.
+   * It also saves the current mode to local storage. 
+   */
   const changeTheme = () => {
     if (theme === "fantasy") {
       setTheme("business");
@@ -25,12 +36,14 @@ const ThemeSwitch = () => {
 
   return (
     <button
-      className="fixed top-1 right-1 rounded-lg bg-accent px-3 py-1/2 hover:bg-accent-focus text-accent-content hover:shadow-2xl hover:-translate-y-px"
+      className="btn btn-circle btn-info fixed top-6 right-6"
       onClick={changeTheme}
     >
-      {theme === "fantasy" ? "Light" : "Dark"}
+      {theme === "fantasy" ? sun : moon}
     </button>
-  );
+  )
+
+
 };
 
 export default ThemeSwitch;

@@ -1,7 +1,8 @@
 import { React, useState, useEffect } from "react";
-import SearchForm from '../components/searchForm';
+import Steps from '../components/steps';
 import ThemeSwitch from "../components/themeSwitch";
 import Logo from "../components/logo";
+import { Link } from 'react-router-dom';
 
 function Home() {
     return (
@@ -9,9 +10,10 @@ function Home() {
             <div className="h-[100px]">
                  <Logo />
                  <ThemeSwitch />
+                <div className="link fixed top-20 left-1 font-mono font-semibold"><Link to="/documentation">Documentation</Link></div>
             </div>
             <div className="w-full flex-grow self-center align-center flex flex-col">
-                <SearchForm />
+                <Steps />
             </div>
         </div>
     )

@@ -1,16 +1,22 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./routes/Home";
+import Documentation from "./routes/Documentation";
+import { useEffect } from "react";
 
 function App() {
- return (
-  //   <Router>
-  //     <Routes>
-  //       <Route exact path="/" component={Home} />
-  //     </Routes>
-  //   </Router>
-    <Home />
+  useEffect(() => {
+    document.title = "BC Ferries Tracker"
+  },[])
+
+  return (
+    <main>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/documentation" component={Documentation} />
+      </Switch>
+    </main>
   );
 }
 

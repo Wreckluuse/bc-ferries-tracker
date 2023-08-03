@@ -1,3 +1,7 @@
+//These constants are used throughout the application to help with things such as constructing
+//the url when an api call is made, and all of the logic for conditional rendering.
+
+
 export const ferryRoutes = {
  TSAWASSEN: "TSA",
  SWARTZ_BAY: "SWB",
@@ -8,10 +12,53 @@ export const ferryRoutes = {
  BOWEN_ISLAND: "BOW",
  FULFORD_HARBOUR: "FUL"
 }
-// tsa can go to swb and duk
-// swb can go to tsa
-// duk can go to tsa
-// hsb can go to nan and lng
-// nan can go to hsb
-// lng can go to hsb
-// bow can go to hsb
+
+export const ferryNames = {
+    "TSA": "Tsawassen",
+    "SWB": "Swartz Bay",
+    "DUK": "Duke Point",
+    "HSB": "Horseshoe Bay",
+    "NAN": "Nanaimo",
+    "LNG": "Langdale",
+    "BOW": "Bowen Island",
+    "FUL": "Fulford Harbour"
+}
+
+export const soloRoutes = {
+    "DUK" : "TSA",
+    "LNG" : "HSB",
+    "NAN" : "HSB",
+    "FUL" : "SWB",
+    "BOW" : "HSB"
+}
+
+export const allRoutes = {
+    "TSA": [
+        "SWB",
+        "DUK"
+    ],
+    "SWB": [
+        "TSA",
+        "FUL"
+    ],
+    "HSB": [
+        "NAN",
+        "LNG",
+        "BOW"
+    ],
+    "DUK": [
+        "TSA"
+    ],
+    "LNG": [
+        "HSB"
+    ],
+    "NAN": [
+        "HSB"
+    ],
+    "FUL": [
+        "SWB"
+    ],
+    "BOW": [
+        "HSB"
+    ]
+}
